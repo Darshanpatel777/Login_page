@@ -3,8 +3,12 @@ package com.example.login_page.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +23,8 @@ public class Addcontact extends AppCompatActivity {
 
     TextInputEditText name, num, em, ad;
 
+    ImageView pop;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +38,41 @@ public class Addcontact extends AppCompatActivity {
         num = findViewById(R.id.num);
         em = findViewById(R.id.em);
         ad = findViewById(R.id.ad);
+        pop = findViewById(R.id.pop);
 
 
         int userid = getIntent().getIntExtra("id", 20);
+
+        pop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PopupMenu pmenu = new PopupMenu(Addcontact.this,pop);
+                pmenu.inflate(R.menu.mymenu);
+                pmenu.show();
+
+                pmenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        if(item.getItemId() == R.id.logout)
+                        {
+                            SpaceScreen.edit.putBoolean("status", true);
+                            SpaceScreen.edit.apply();
+
+                            startActivity(new Intent(Addcontact.this,SignIn.class));
+                            finish();
+
+//                            Toast.makeText(Addcontact.this,"setting",Toast.LENGTH_SHORT).show();
+                        }
+                        return false;
+                    }
+                });
+            }
+        });
+
+
+
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
