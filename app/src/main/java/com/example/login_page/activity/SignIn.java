@@ -39,7 +39,6 @@ public class SignIn extends AppCompatActivity {
 
                 Cursor data = db.userlogin(username.getText().toString(), password.getText().toString());
 
-
                 while (data.moveToNext()) {
                     Log.d("====d====", "onClick: id ==> " + data.getInt(0));
                     Log.d("====d====", "onClick: name ==> " + data.getString(1));
@@ -50,8 +49,6 @@ public class SignIn extends AppCompatActivity {
                     SpaceScreen.edit.putInt("uid", data.getInt(0));
                     SpaceScreen.edit.apply();
 
-
-
                     startActivity(new Intent(SignIn.this, HomePage.class).
                             putExtra("id", data.getInt(0))
                             .putExtra("name", data.getString(1)));
@@ -60,7 +57,6 @@ public class SignIn extends AppCompatActivity {
                 }
             }
         });
-
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override

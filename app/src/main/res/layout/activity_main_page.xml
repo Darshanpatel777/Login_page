@@ -11,24 +11,20 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/back"
+        android:id="@+id/pop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="20dp"
-        android:backgroundTint="#9D5E5E"
-        android:src="@drawable/baseline_cancel_24" />
+        android:layout_margin="10sp"
+        android:backgroundTint="#857C7C"
+        android:src="@drawable/dot" />
 
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80sp">
 
-
-<ListView
-    android:layout_marginTop="80sp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/list">
-
-</ListView>
-
+    </ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add"
@@ -37,7 +33,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
-        android:backgroundTint="#9D5E5E"
+        android:backgroundTint="#857C7C"
         android:src="@drawable/addcontact" />
 
 </RelativeLayout>

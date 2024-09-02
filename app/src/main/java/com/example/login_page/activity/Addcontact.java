@@ -23,7 +23,6 @@ public class Addcontact extends AppCompatActivity {
 
     TextInputEditText name, num, em, ad;
 
-    ImageView pop;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -38,38 +37,10 @@ public class Addcontact extends AppCompatActivity {
         num = findViewById(R.id.num);
         em = findViewById(R.id.em);
         ad = findViewById(R.id.ad);
-        pop = findViewById(R.id.pop);
+
 
 
         int userid = getIntent().getIntExtra("id", 20);
-
-        pop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                PopupMenu pmenu = new PopupMenu(Addcontact.this,pop);
-                pmenu.inflate(R.menu.mymenu);
-                pmenu.show();
-
-                pmenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-
-                        if(item.getItemId() == R.id.logout)
-                        {
-                            SpaceScreen.edit.putBoolean("status", true);
-                            SpaceScreen.edit.apply();
-
-                            startActivity(new Intent(Addcontact.this,SignIn.class));
-                            finish();
-
-//                            Toast.makeText(Addcontact.this,"setting",Toast.LENGTH_SHORT).show();
-                        }
-                        return false;
-                    }
-                });
-            }
-        });
 
 
 
@@ -134,35 +105,3 @@ public class Addcontact extends AppCompatActivity {
 }
 
 
-// Retrieve the phone number input from the user
-//String phoneNumber = num.getText().toString();
-//
-//// Validate the phone number
-//        if (phoneNumber.isEmpty()) {
-//        // Check if the phone number field is empty
-//        num.setError("Phone number is required");
-//            num.requestFocus();
-//            return;
-//                    } else if (!phoneNumber.matches("\\d{10}")) { // Assuming a 10-digit phone number
-//        // Check if the phone number format is valid (10 digits)
-//        num.setError("Please enter a valid 10-digit phone number");
-//            num.requestFocus();
-//            return;
-//                    }
-
-
-// Retrieve the email input from the user
-//String email = em.getText().toString();
-//
-//// Validate the email
-//        if (email.isEmpty()) {
-//        // Check if the email field is empty
-//        em.setError("Email is required");
-//            em.requestFocus();
-//            return;
-//                    } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//        // Check if the email format is valid
-//        em.setError("Please enter a valid email address");
-//            em.requestFocus();
-//            return;
-//                    }

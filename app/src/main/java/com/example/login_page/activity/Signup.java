@@ -47,24 +47,34 @@ public class Signup extends AppCompatActivity {
                 String confirmPassword = conpass.getText().toString();
 
 
+                // Retrieve the email number input from the user
+                String emailinput = email.getText().toString();
+                //email required check
+                if (emailinput.isEmpty()) {
+                    email.setError("Email if required");
+                    email.requestFocus();
+                    return;
+                } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailinput).matches()) {
+                    email.setError("Please enter a valid email address");
+                    // Check if the email format is valid
+                    email.requestFocus();
+                    return;
+                }
+
+
                 if (!password.equals(confirmPassword)) {
                     conpass.setError("Passwords don't match");
 
-                }
-                else
-                {
-                    Boolean d = db.insertdata(user.getText().toString(), email.getText().toString(),password);
+                } else {
+                    Boolean d = db.insertdata(user.getText().toString(), email.getText().toString(), password);
 
-                    if(d == true)
-                    {
+                    if (d == true) {
                         Toast.makeText(Signup.this, "User created successfully!", Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(Signup.this, SignIn.class));
                         finish();
 
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(Signup.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
                     }
                 }
