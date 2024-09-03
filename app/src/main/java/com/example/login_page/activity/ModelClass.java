@@ -2,6 +2,17 @@ package com.example.login_page.activity;
 
 public class ModelClass {
     private String name , num;
+    private Integer id;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 
 //    ModelClass(String name, String num)
 //    {

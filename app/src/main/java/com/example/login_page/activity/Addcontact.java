@@ -39,13 +39,17 @@ public class Addcontact extends AppCompatActivity {
         ad = findViewById(R.id.ad);
 
 
-
         int userid = getIntent().getIntExtra("id", 20);
 
+        String oldname = getIntent().getStringExtra("name");
+        String oldnum = getIntent().getStringExtra("num");
+        int cid = getIntent().getIntExtra("cid", 90);
 
 
+        name.setText(oldname);
+        num.setText(oldnum);
 
-        save.setOnClickListener(new View.OnClickListener() {
+       /* save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -55,41 +59,25 @@ public class Addcontact extends AppCompatActivity {
                 // Retrieve the phone number input from the user
                 String email = em.getText().toString();
                 //email required check
-                if (email.isEmpty()) {
-                    em.setError("Email if required");
-                    em.requestFocus();
-                    return;
-                } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())
+                {
                     em.setError("Please enter a valid email address");
-                    // Check if the email format is valid
-                    em.requestFocus();
                     return;
                 }
+
 
 
                 //number  required check
-                // Retrieve the phone number input from the user
                 String number = num.getText().toString();
-                // Validate the phone number
                 if (number.isEmpty()) {
                     num.setError("number if required");
-                    num.requestFocus();
                     return;
                 }
-                else if (number.length() > 10)
+                else if (number.length() != 10) // number 10 digit ma j aava aena mate
                 {
-                    // Check if the phone number exceeds 10 digits
                     num.setError("Phone number cannot exceed 10 digits");
-                    num.requestFocus();
                     return;
                 }
-                else if (!number.matches("\\d{10}")) {
-                    num.setError("Please enter a valid 10-digit phone number");
-                    num.requestFocus();
-                    return;
-                }
-
-
                 Boolean b = db.addcontact(userid, name.getText().toString()
                         , num.getText().toString(), em.getText().toString()
                         , ad.getText().toString());
@@ -97,6 +85,28 @@ public class Addcontact extends AppCompatActivity {
                     startActivity(new Intent(Addcontact.this, HomePage.class).putExtra("id", userid));
                     finish();
                 }
+            }
+        });*/
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                MyDatabase db = new MyDatabase(Addcontact.this);
+
+                db.editdata(name.getText().toString(), num.getText().toString(), cid);
+
+            }
+        });
+
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(Addcontact.this, HomePage.class).putExtra("id", userid));
+                finish();
+
             }
         });
 

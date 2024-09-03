@@ -48,23 +48,28 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
 
     //user name , number, add etc......... add kare te show karave
-    public   Cursor selectcon(int userid)
-    {
-        String s = "SELECT * FROM contact WHERE userid = "+userid;
-        return getReadableDatabase().rawQuery(s,null);
+    public Cursor selectcon(int userid) {
+        String s = "SELECT * FROM contact WHERE userid = " + userid;
+        return getReadableDatabase().rawQuery(s, null);
     }
-
 
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
-    
+
     public Cursor userlogin(String user, String pass) {
 
         String select = "SELECT * FROM user WHERE username = '" + user + "' AND password = '" + pass + "'";
         Cursor cr = getReadableDatabase().rawQuery(select, null);
 
         return cr;
+    }
+
+    public void editdata(String newname, String newnum, int contactid) {
+
+        String update = "UPDATE contact SET name = '" + newname + "' , number = '" + newnum + "' WHERE id = " + contactid;
+        getWritableDatabase().execSQL(update);
+
     }
 }

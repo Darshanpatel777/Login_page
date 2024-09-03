@@ -46,6 +46,8 @@ public class HomePage extends AppCompatActivity {
 
         list.setAdapter(new MyAdapter(this,userid));
 
+
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
