@@ -67,8 +67,10 @@ public class MyAdapter extends BaseAdapter {
             public void onClick(View v) {
 
 
-                context.startActivity(new Intent(context, Addcontact.class).putExtra("name", name.getText()).
-                        putExtra("num", num.getText()).putExtra("cid", datalist.get(position).getId()));
+                context.startActivity(new Intent(context, Update.class).
+                        putExtra("name", name.getText()).
+                        putExtra("num", num.getText()).
+                        putExtra("cid", datalist.get(position).getId()));
 
 
             }

@@ -41,20 +41,12 @@ public class Addcontact extends AppCompatActivity {
 
         int userid = getIntent().getIntExtra("id", 20);
 
-        String oldname = getIntent().getStringExtra("name");
-        String oldnum = getIntent().getStringExtra("num");
-        int cid = getIntent().getIntExtra("cid", 90);
 
-
-        name.setText(oldname);
-        num.setText(oldnum);
-
-       /* save.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 MyDatabase db = new MyDatabase(Addcontact.this);
-
 
                 // Retrieve the phone number input from the user
                 String email = em.getText().toString();
@@ -64,8 +56,6 @@ public class Addcontact extends AppCompatActivity {
                     em.setError("Please enter a valid email address");
                     return;
                 }
-
-
 
                 //number  required check
                 String number = num.getText().toString();
@@ -81,23 +71,25 @@ public class Addcontact extends AppCompatActivity {
                 Boolean b = db.addcontact(userid, name.getText().toString()
                         , num.getText().toString(), em.getText().toString()
                         , ad.getText().toString());
-                if (b) {
+                if (b)
+                {
                     startActivity(new Intent(Addcontact.this, HomePage.class).putExtra("id", userid));
                     finish();
+
                 }
             }
-        });*/
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                MyDatabase db = new MyDatabase(Addcontact.this);
-
-                db.editdata(name.getText().toString(), num.getText().toString(), cid);
-
-            }
         });
+
+//        save.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                MyDatabase db = new MyDatabase(Addcontact.this);
+//
+//                db.editdata(name.getText().toString(), num.getText().toString(), cid);
+//
+//            }
+//        });
 
 
         cancel.setOnClickListener(new View.OnClickListener() {
