@@ -72,4 +72,9 @@ public class MyDatabase extends SQLiteOpenHelper {
         getWritableDatabase().execSQL(update);
 
     }
+
+    public void delete(int contactid) {
+        String delete = "DELETE FROM contact WHERE ID = " + contactid;
+        getWritableDatabase().execSQL(delete);
+    }
 }

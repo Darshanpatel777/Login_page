@@ -34,7 +34,7 @@ public class SpaceScreen extends AppCompatActivity {
             public void run() {
                 if (userstatus) {
                     startActivity(new Intent(SpaceScreen.this, HomePage.class).
-                            putExtra("id",sp.getInt("uid",0)));
+                            putExtra("userid",sp.getInt("uid",0)));
                     finish();
                 } else {
                     startActivity(new Intent(SpaceScreen.this, SignIn.class));

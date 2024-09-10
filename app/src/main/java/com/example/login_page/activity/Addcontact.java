@@ -39,7 +39,7 @@ public class Addcontact extends AppCompatActivity {
         ad = findViewById(R.id.ad);
 
 
-        int userid = getIntent().getIntExtra("id", 20);
+        int userid = getIntent().getIntExtra("userid", 20);
 
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +73,7 @@ public class Addcontact extends AppCompatActivity {
                         , ad.getText().toString());
                 if (b)
                 {
-                    startActivity(new Intent(Addcontact.this, HomePage.class).putExtra("id", userid));
+                    startActivity(new Intent(Addcontact.this, HomePage.class).putExtra("userid", userid));
                     finish();
 
                 }
@@ -96,7 +96,7 @@ public class Addcontact extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(Addcontact.this, HomePage.class).putExtra("id", userid));
+                startActivity(new Intent(Addcontact.this, HomePage.class).putExtra("userid", userid));
                 finish();
 
             }

@@ -50,7 +50,7 @@ public class SignIn extends AppCompatActivity {
                     SpaceScreen.edit.apply();
 
                     startActivity(new Intent(SignIn.this, HomePage.class).
-                            putExtra("id", data.getInt(0))
+                            putExtra("userid", data.getInt(0))
                             .putExtra("name", data.getString(1)));
 
 

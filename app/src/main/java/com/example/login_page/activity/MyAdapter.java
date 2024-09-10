@@ -21,8 +21,11 @@ public class MyAdapter extends BaseAdapter {
 
     Context context;
 
+    int uid;
+
     MyAdapter(Context context, int uid) {
         this.context = context;
+        this.uid = uid;
 
         MyDatabase db = new MyDatabase(context);
         Cursor cr = db.selectcon(uid);
@@ -70,7 +73,8 @@ public class MyAdapter extends BaseAdapter {
                 context.startActivity(new Intent(context, Update.class).
                         putExtra("name", name.getText()).
                         putExtra("num", num.getText()).
-                        putExtra("cid", datalist.get(position).getId()));
+                        putExtra("cid", datalist.get(position).getId()).
+                        putExtra("userid",uid));
 
 
             }

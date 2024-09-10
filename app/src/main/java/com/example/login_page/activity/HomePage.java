@@ -42,7 +42,7 @@ public class HomePage extends AppCompatActivity {
         pop = findViewById(R.id.pop);
 
 
-        int userid = getIntent().getIntExtra("id",10);
+        int userid = getIntent().getIntExtra("userid",10);
 
         list.setAdapter(new MyAdapter(this,userid));
 
@@ -53,7 +53,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                startActivity(new Intent(HomePage.this, Addcontact.class).putExtra("id",userid));
+                startActivity(new Intent(HomePage.this, Addcontact.class).putExtra("userid",userid));
                 finish();
 
 
