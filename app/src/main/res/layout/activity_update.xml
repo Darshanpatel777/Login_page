@@ -117,5 +117,32 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="or"
+        android:textSize="35sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="20sp"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:text="Delete"
+            android:id="@+id/delete"
+            android:textSize="35sp"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

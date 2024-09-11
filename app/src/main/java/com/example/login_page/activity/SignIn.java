@@ -16,7 +16,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class SignIn extends AppCompatActivity {
 
-    TextView signup;
+    TextView create;
     Button loginuser;
     TextInputEditText username;
     TextInputEditText password;
@@ -26,7 +26,7 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        signup = findViewById(R.id.signup);
+        create = findViewById(R.id.create);
         loginuser = findViewById(R.id.loginuser);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
@@ -37,6 +37,7 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // user login id - password nakhva
                 Cursor data = db.userlogin(username.getText().toString(), password.getText().toString());
 
                 while (data.moveToNext()) {
@@ -45,10 +46,12 @@ public class SignIn extends AppCompatActivity {
                     Log.d("====d====", "onClick: email ==> " + data.getString(2));
 
 
+                    // last login chalu rakhava mate
                     SpaceScreen.edit.putBoolean("status", true);
                     SpaceScreen.edit.putInt("uid", data.getInt(0));
                     SpaceScreen.edit.apply();
 
+                    // next main page ma java amate
                     startActivity(new Intent(SignIn.this, HomePage.class).
                             putExtra("userid", data.getInt(0))
                             .putExtra("name", data.getString(1)));
@@ -58,7 +61,8 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        // new login create karava mate
+        create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

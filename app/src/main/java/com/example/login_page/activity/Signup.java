@@ -39,6 +39,7 @@ public class Signup extends AppCompatActivity {
         MyDatabase db = new MyDatabase(Signup.this);
 
 
+        // new user create karava mate
         createuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +62,7 @@ public class Signup extends AppCompatActivity {
                     return;
                 }
 
-
+                // password & confirmPassword same che te check karava
                 if (!password.equals(confirmPassword)) {
                     conpass.setError("Passwords don't match");
 
@@ -82,6 +83,7 @@ public class Signup extends AppCompatActivity {
             }
         });
 
+        // login account hot to login page ma back aavva
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

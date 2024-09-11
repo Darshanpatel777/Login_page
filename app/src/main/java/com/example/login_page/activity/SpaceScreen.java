@@ -15,6 +15,8 @@ import com.example.login_page.R;
 
 public class SpaceScreen extends AppCompatActivity {
 
+    // app open thay taire koi fixx app design logo aave aena mate
+
     static SharedPreferences sp;
     static SharedPreferences.Editor edit;
 
@@ -32,6 +34,8 @@ public class SpaceScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
+                // user login 6e ke nai ae chek karva
                 if (userstatus) {
                     startActivity(new Intent(SpaceScreen.this, HomePage.class).
                             putExtra("userid",sp.getInt("uid",0)));
@@ -41,7 +45,9 @@ public class SpaceScreen extends AppCompatActivity {
                     finish();
                 }
             }
-        }, 2000);
+        }
+        // ketla milli secound delay karvu che aena mate
+        , 2000);
 
 
     }

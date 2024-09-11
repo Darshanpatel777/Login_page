@@ -13,14 +13,13 @@ import com.example.login_page.R;
 import com.example.login_page.database.MyDatabase;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class MyAdapter extends BaseAdapter {
 
 
     ArrayList<ModelClass> datalist = new ArrayList<>();
-
     Context context;
-
     int uid;
 
     MyAdapter(Context context, int uid) {
@@ -37,6 +36,25 @@ public class MyAdapter extends BaseAdapter {
             d.setId(cr.getInt(0));
             datalist.add(d);
         }
+
+
+        // contact list name alphabet ma aava mate
+        ArrayList<String> namelist = new ArrayList<>();
+        for (int i = 0; i < datalist.size(); i++) {
+            namelist.add(datalist.get(i).getName());
+        }
+        namelist.sort(Comparator.naturalOrder());
+
+        ArrayList<ModelClass> temp = new ArrayList<>();
+        for (int i = 0; i < datalist.size(); i++) {
+            for (int j = 0; j < datalist.size(); j++) {
+                if (namelist.get(i) == datalist.get(j).getName()) {
+                    temp.add(datalist.get(j));
+                    break;
+                }
+            }
+        }
+        datalist = temp;
     }
 
     @Override
@@ -65,6 +83,8 @@ public class MyAdapter extends BaseAdapter {
         name.setText(datalist.get(position).getName());
         num.setText(datalist.get(position).getNum());
 
+
+        // date edit-delete karava mate & complete thay gaya  bad main page ma aava mate
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +94,7 @@ public class MyAdapter extends BaseAdapter {
                         putExtra("name", name.getText()).
                         putExtra("num", num.getText()).
                         putExtra("cid", datalist.get(position).getId()).
-                        putExtra("userid",uid));
+                        putExtra("userid", uid));
 
 
             }

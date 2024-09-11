@@ -8,6 +8,8 @@ import android.util.Log;
 
 public class MyDatabase extends SQLiteOpenHelper {
 
+    // user all login data , contact date , edit - delete karva mate
+
     public MyDatabase(Context context) {
         super(context, "mydata.db", null, 1);
     }
@@ -15,15 +17,22 @@ public class MyDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        // * unique * keyword  all ma date different aave aena mate
+       // String table = "CREATE TABLE user (username text unique, email text, password text)";
+
+        // login username , email password (login user date table "user date")
         String table = "CREATE TABLE user (id integer primary key autoincrement ,username text unique, email text, password text)";
         db.execSQL(table);
 
+
+        // add contact name,number,email,address p (login user  contact d table "contact date")
         String contact = "CREATE TABLE contact (id integer primary key autoincrement,userid integer ,name text , number text , email text , adress text)";
         db.execSQL(contact);
 
 
     }
 
+    //  add contact name,number,email,address return & save
     public Boolean addcontact(int userid, String name, String number, String email, String adress) {
         try {
 
@@ -36,6 +45,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     }
 
+    // login  username , email, password return & save
     public Boolean insertdata(String username, String email, String pass) {
         try {
             String insert = "INSERT INTO user (username , email , password) VALUES ('" + username + "','" + email + "','" + pass + "')";
@@ -58,6 +68,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
+    //user login username , password OK check karava
     public Cursor userlogin(String user, String pass) {
 
         String select = "SELECT * FROM user WHERE username = '" + user + "' AND password = '" + pass + "'";
@@ -66,6 +77,8 @@ public class MyDatabase extends SQLiteOpenHelper {
         return cr;
     }
 
+
+    // contact data edit karava
     public void editdata(String newname, String newnum, int contactid) {
 
         String update = "UPDATE contact SET name = '" + newname + "' , number = '" + newnum + "' WHERE id = " + contactid;
@@ -73,7 +86,9 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     }
 
-    public void delete(int contactid) {
+
+    // contact data delete karava
+    public void deletedata(int contactid) {
         String delete = "DELETE FROM contact WHERE ID = " + contactid;
         getWritableDatabase().execSQL(delete);
     }

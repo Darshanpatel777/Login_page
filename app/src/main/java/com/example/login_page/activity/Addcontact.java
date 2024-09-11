@@ -20,9 +20,9 @@ import com.google.android.material.textfield.TextInputEditText;
 public class Addcontact extends AppCompatActivity {
 
     Button save, cancel;
-
     TextInputEditText name, num, em, ad;
 
+    // new contact data add karava
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,7 +41,7 @@ public class Addcontact extends AppCompatActivity {
 
         int userid = getIntent().getIntExtra("userid", 20);
 
-
+        //  new contact data add karava
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,9 +68,12 @@ public class Addcontact extends AppCompatActivity {
                     num.setError("Phone number cannot exceed 10 digits");
                     return;
                 }
+                //  contact data input  karava
                 Boolean b = db.addcontact(userid, name.getText().toString()
                         , num.getText().toString(), em.getText().toString()
                         , ad.getText().toString());
+
+                // all input data OK che ae chek karava
                 if (b)
                 {
                     startActivity(new Intent(Addcontact.this, HomePage.class).putExtra("userid", userid));
@@ -80,18 +83,8 @@ public class Addcontact extends AppCompatActivity {
             }
         });
 
-//        save.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                MyDatabase db = new MyDatabase(Addcontact.this);
-//
-//                db.editdata(name.getText().toString(), num.getText().toString(), cid);
-//
-//            }
-//        });
 
-
+        // back main page ma aavaa
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
