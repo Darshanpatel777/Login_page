@@ -3,6 +3,7 @@ package com.example.login_page.activity;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,7 +20,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
 import com.example.login_page.R;
+import com.example.login_page.database.MyDatabase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class HomePage extends AppCompatActivity {
 
@@ -27,6 +32,8 @@ public class HomePage extends AppCompatActivity {
     ListView list;
     FloatingActionButton add, pop;
 
+
+    ArrayList<ModelClass> datalist = new ArrayList<>();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,27 +48,78 @@ public class HomePage extends AppCompatActivity {
         pop = findViewById(R.id.pop);
         search = findViewById(R.id.search);
 
+        ArrayList<ModelClass> searchList = new ArrayList<>();
         // list ma data search karva
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                Log.d("=======", "onQueryTextSubmit:" + query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.d("=======", "onQueryTextChange:" + newText);
-
-                return false;
-            }
-        });
 
         int userid = getIntent().getIntExtra("userid", 10);
 
+
+
+
+        MyDatabase db = new MyDatabase(this);
+        Cursor cr = db.selectcon(userid);
+
+        while (cr.moveToNext()) {
+            ModelClass d = new ModelClass();
+            d.setName(cr.getString(2));
+            d.setNum(cr.getString(3));
+            d.setId(cr.getInt(0));
+            datalist.add(d);
+        }
+
+
+        // contact list name alphabet ma aava mate
+        ArrayList<String> namelist = new ArrayList<>();
+        for (int i = 0; i < datalist.size(); i++) {
+            namelist.add(datalist.get(i).getName());
+        }
+        namelist.sort(Comparator.naturalOrder());
+
+        ArrayList<ModelClass> temp = new ArrayList<>();
+        for (int i = 0; i < datalist.size(); i++) {
+            for (int j = 0; j < datalist.size(); j++) {
+                if (namelist.get(i) == datalist.get(j).getName()) {
+                    temp.add(datalist.get(j));
+                    break;
+                }
+            }
+        }
+        datalist = temp;
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+
+            // submit ni click  thay taire data show karva
+            public boolean onQueryTextSubmit(String query) {
+
+                return true;
+            }
+
+            // text type thay taire data show karva
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                Log.d("=======", "onQueryTextChange:" + newText);
+                searchList.clear();
+
+                // datalist ma contact na data search karva mate
+                for (int i = 0; i < datalist.size(); i++)
+                {
+//                    Log.d("=======", "onQueryTextChange: enter in loop");
+                    if (datalist.get(i).getName().contains(newText))
+                    {
+                        searchList.add(datalist.get(i));
+                    }
+                }
+                //search karavel data contact list ma show krava
+                list.setAdapter(new MyAdapter(HomePage.this, userid, searchList));
+                return true;
+            }
+        });
+
+
         // contact list mate
-        list.setAdapter(new MyAdapter(this, userid));
+        list.setAdapter(new MyAdapter(this, userid, datalist));
 
         // new contact add karava
         add.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +148,7 @@ public class HomePage extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
 
-                        if (item.getItemId() == R.id.logout)
-                        {
+                        if (item.getItemId() == R.id.logout) {
                             // exit karva mate no Dialog box open thase
                             Dialog dialog = new Dialog(HomePage.this);
                             dialog.setContentView(R.layout.dialogview);

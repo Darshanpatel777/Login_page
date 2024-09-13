@@ -92,4 +92,11 @@ public class MyDatabase extends SQLiteOpenHelper {
         String delete = "DELETE FROM contact WHERE ID = " + contactid;
         getWritableDatabase().execSQL(delete);
     }
+
+
+    public void searchdata(String Query) {
+
+        String search = "SELECt * FROM contact WHERE name LIKE 'query%'";
+        getWritableDatabase().execSQL(search);
+    }
 }

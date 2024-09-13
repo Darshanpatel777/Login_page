@@ -22,40 +22,12 @@ public class MyAdapter extends BaseAdapter {
     Context context;
     int uid;
 
-    MyAdapter(Context context, int uid) {
+    MyAdapter(Context context, int uid, ArrayList<ModelClass> datalist) {
         this.context = context;
         this.uid = uid;
-
-        MyDatabase db = new MyDatabase(context);
-        Cursor cr = db.selectcon(uid);
-
-        while (cr.moveToNext()) {
-            ModelClass d = new ModelClass();
-            d.setName(cr.getString(2));
-            d.setNum(cr.getString(3));
-            d.setId(cr.getInt(0));
-            datalist.add(d);
-        }
-
-
-        // contact list name alphabet ma aava mate
-        ArrayList<String> namelist = new ArrayList<>();
-        for (int i = 0; i < datalist.size(); i++) {
-            namelist.add(datalist.get(i).getName());
-        }
-        namelist.sort(Comparator.naturalOrder());
-
-        ArrayList<ModelClass> temp = new ArrayList<>();
-        for (int i = 0; i < datalist.size(); i++) {
-            for (int j = 0; j < datalist.size(); j++) {
-                if (namelist.get(i) == datalist.get(j).getName()) {
-                    temp.add(datalist.get(j));
-                    break;
-                }
-            }
-        }
-        datalist = temp;
+        this.datalist = datalist;
     }
+
 
     @Override
     public int getCount() {
@@ -90,11 +62,7 @@ public class MyAdapter extends BaseAdapter {
             public void onClick(View v) {
 
 
-                context.startActivity(new Intent(context, Update.class).
-                        putExtra("name", name.getText()).
-                        putExtra("num", num.getText()).
-                        putExtra("cid", datalist.get(position).getId()).
-                        putExtra("userid", uid));
+                context.startActivity(new Intent(context, Update.class).putExtra("name", name.getText()).putExtra("num", num.getText()).putExtra("cid", datalist.get(position).getId()).putExtra("userid", uid));
 
 
             }
