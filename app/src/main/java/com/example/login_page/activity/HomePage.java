@@ -117,7 +117,6 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-
         // contact list mate
         list.setAdapter(new MyAdapter(this, userid, datalist));
 
@@ -133,6 +132,9 @@ public class HomePage extends AppCompatActivity {
 
             }
         });
+
+
+
 
         // popup menu open karva
         pop.setOnClickListener(new View.OnClickListener() {
